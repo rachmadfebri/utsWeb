@@ -153,3 +153,89 @@ body {
   color: var(--accent-color);
   transform: translateY(-3px);
 }
+
+/* Konten Item Sebelah Kanan */
+.portfolio-content {
+  margin-left: 25%; /* Sama dengan lebar sidebar */
+  width: 75%;
+  padding: 40px;
+}
+
+.portfolio-header h2 {
+  font-size: 2.5rem;
+  margin-bottom: 30px;
+  border-bottom: 2px solid var(--border-color);
+  padding-bottom: 15px;
+}
+
+.portfolio-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 25px;
+}
+
+.portfolio-grid a {
+  text-decoration: none;
+  color: inherit;
+  display: block;
+}
+
+.portfolio-item {
+  position: relative;
+  overflow: hidden;
+  border-radius: 12px;
+  border: 1px solid var(--border-color);
+  background: var(--card-background);
+  aspect-ratio: 4 / 3;
+  cursor: pointer;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.portfolio-item:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.4);
+}
+
+.portfolio-item img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.4s ease, filter 0.4s ease;
+}
+
+.portfolio-item .overlay {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: linear-gradient(
+    to top,
+    rgba(0, 0, 0, 0.9) 0%,
+    rgba(0, 0, 0, 0) 100%
+  );
+  color: white;
+  padding: 20px;
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.4s ease, transform 0.4s ease;
+}
+
+.portfolio-item:hover img {
+  transform: scale(1.05);
+  filter: brightness(0.7);
+}
+
+.portfolio-item:hover .overlay {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.overlay h3 {
+  margin-bottom: 5px;
+  font-size: 1.2rem;
+}
+
+.overlay p {
+  font-size: 0.9rem;
+  color: var(--secondary-text-color);
+}
