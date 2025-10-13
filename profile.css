@@ -72,3 +72,84 @@ body {
   line-height: 1.6;
   margin-bottom: 25px;
 }
+
+.profile-actions {
+  display: flex;
+  gap: 10px;
+  width: 100%;
+  margin-bottom: 25px;
+}
+
+.action-button {
+  flex-grow: 1;
+  padding: 10px;
+  border-radius: 8px;
+  border: none;
+  cursor: pointer;
+  font-weight: 600;
+  transition: all 0.3s ease;
+}
+
+.follow-btn {
+  background-color: var(--accent-color);
+  color: var(--background-color);
+}
+
+.follow-btn:hover {
+  background-color: #00e0e0;
+  box-shadow: 0 0 10px rgba(0, 255, 255, 0.5);
+}
+
+.message-btn {
+  background-color: transparent;
+  color: var(--primary-text-color);
+  border: 1px solid var(--border-color);
+}
+
+.message-btn:hover {
+  background-color: var(--border-color);
+}
+
+.profile-stats {
+  display: flex;
+  justify-content: space-around;
+  width: 100%;
+  margin-bottom: 30px;
+  padding-top: 20px;
+  border-top: 1px solid var(--border-color);
+}
+
+.stat-item {
+  text-align: center;
+}
+
+.stat-item .count {
+  font-size: 1.2rem;
+  font-weight: 600;
+}
+
+.stat-item .label {
+  font-size: 0.8rem;
+  color: var(--secondary-text-color);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.social-links {
+  margin-top: auto; /* Mendorong ke bawah */
+  padding-top: 20px;
+}
+
+.social-links a {
+  color: var(--secondary-text-color);
+  margin: 0 12px;
+  font-size: 1.5rem;
+  transition: color 0.3s ease, transform 0.3s ease;
+  text-decoration: none;
+  display: inline-block;
+}
+
+.social-links a:hover {
+  color: var(--accent-color);
+  transform: translateY(-3px);
+}
