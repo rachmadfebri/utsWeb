@@ -40,3 +40,14 @@ body::before {
   animation: pulse 10s infinite alternate;
   z-index: 0;
 }
+
+@keyframes pulse {
+  from {
+    transform: scale(0.8);
+    opacity: 0.5;
+  }
+  to {
+    transform: scale(1.2);
+    opacity: 1;
+  }
+}
