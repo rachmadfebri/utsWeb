@@ -22,10 +22,37 @@
   justify-content: space-between;
   align-items: center;
   padding: 15px 40px;
-  background-color: rgba(10, 10, 10, 0.8);
+  background-color: rgba(30, 30, 30, 0.8);
   backdrop-filter: blur(10px);
   border-bottom: 1px solid var(--border-color);
   z-index: 1000;
+}
+
+.logo {
+  font-weight: 700;
+  font-size: 1.5rem;
+  color: var(--primary-text-color);
+  text-decoration: none;
+}
+.logo span {
+  color: var(--accent-color);
+}
+
+.desktop-nav {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 30px;
+}
+.desktop-nav a {
+  color: var(--secondary-text-color);
+  text-decoration: none;
+  transition: color 0.3s;
+}
+.desktop-nav a:hover,
+.desktop-nav a.active {
+  color: var(--accent-color);
 }
 
 body {
@@ -48,7 +75,7 @@ body {
   background-color: var(--card-background);
   border-right: 1px solid var(--border-color);
   position: fixed;
-  top: 0;
+  top: 50px;
   left: 0;
   height: 100%;
   overflow-y: auto;
@@ -152,7 +179,7 @@ body {
 }
 
 .social-links {
-  margin-top: auto; /* Mendorong ke bawah */
+  margin-top: 140px;
   padding-top: 20px;
 }
 
@@ -172,9 +199,10 @@ body {
 
 /* Konten Item Sebelah Kanan */
 .portfolio-content {
-  margin-left: 25%; /* Sama dengan lebar sidebar */
+  margin-left: 25%;
   width: 75%;
   padding: 40px;
+  padding-top: 60px;
 }
 
 .portfolio-header h2 {
