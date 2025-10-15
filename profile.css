@@ -34,6 +34,7 @@
   color: var(--primary-text-color);
   text-decoration: none;
 }
+
 .logo span {
   color: var(--accent-color);
 }
@@ -67,7 +68,7 @@ body {
   min-height: 100vh;
 }
 
-/* Kolom Profil Sebelah Kiri */
+/*Kiri*/
 .profile-sidebar {
   width: 25%;
   max-width: 320px;
@@ -197,7 +198,7 @@ body {
   transform: translateY(-3px);
 }
 
-/* Konten Item Sebelah Kanan */
+/* Kanan */
 .portfolio-content {
   margin-left: 25%;
   width: 75%;

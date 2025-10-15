@@ -13,6 +13,17 @@
   box-sizing: border-box;
 }
 
+.logo {
+  font-weight: 700;
+  font-size: 1.5rem;
+  color: var(--primary-text-color);
+  text-decoration: none;
+}
+
+.logo span {
+  color: var(--accent-color);
+}
+
 body {
   font-family: "SUSE Mono", monospace;
   background-color: var(--background-color);
@@ -24,7 +35,7 @@ body {
   overflow: hidden;
 }
 
-/* Efek latar belakang */
+/* bg */
 body::before {
   content: "";
   position: absolute;
