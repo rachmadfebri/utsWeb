@@ -19,7 +19,6 @@
   color: var(--primary-text-color);
   text-decoration: none;
 }
-
 .logo span {
   color: var(--accent-color);
 }
@@ -35,7 +34,7 @@ body {
   overflow: hidden;
 }
 
-/* bg */
+/* Efek latar belakang */
 body::before {
   content: "";
   position: absolute;
