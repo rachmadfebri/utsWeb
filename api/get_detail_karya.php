@@ -15,7 +15,7 @@ if (!$dbconn) {
 
 // mengambil detail satu karya berdasarkan ID
 $query = 'SELECT w.judul, w.deskripsi_lengkap, w.url_gambar, w.tanggal_dibuat, u.nama_lengkap, u.jabatan 
-          FROM works w 
+          FROM artworks w 
           JOIN users u ON w.user_id = u.id 
           WHERE w.id = $1';
 

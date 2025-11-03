@@ -1,39 +1,42 @@
 <?php
 require_once 'config.php';
 
-// mendapatkan data JSON dari body request
-$data = json_decode(file_get_contents('php://input'), true);
+// Mengambil data JSON yang dikirim dari frontend
+$input = json_decode(file_get_contents('php://input'), true);
 
-if (!$data || !isset($data['email']) || !isset($data['password'])) {
-    json_response(['success' => false, 'message' => 'Data tidak lengkap.'], 400);
+// Validasi input awal
+if (!$input || !isset($input['email']) || !isset($input['password'])) {
+    json_response(['success' => false, 'message' => 'Input tidak lengkap.'], 400);
 }
 
-$email = $data['email'];
-$password = $data['password'];
+$email = $input['email'];
+$password = $input['password'];
 
-// koneksi
+// Menghubungkan ke database
 $dbconn = pg_connect($conn_string);
 if (!$dbconn) {
-    json_response(['success' => false, 'message' => 'Error: Tidak dapat terhubung ke PostgreSQL.'], 500);
+    json_response(['success' => false, 'message' => 'Koneksi database gagal.'], 500);
 }
 
-// prepared statement untuk keamanan
-$query = 'SELECT id, password_hash FROM users WHERE email = $1';
+// [DIPERBAIKI] Mengambil dari kolom 'password', bukan 'password_hash'
+$query = 'SELECT id, password FROM users WHERE email = $1';
 $result = pg_query_params($dbconn, $query, array($email));
 
 if (!$result) {
-    json_response(['success' => false, 'message' => 'Query gagal.'], 500);
+    json_response(['success' => false, 'message' => 'Terjadi kesalahan pada query.'], 500);
 }
 
 $user = pg_fetch_assoc($result);
 
-if ($user && password_verify($password, $user['password_hash'])) {
-    // login berhasil
-    json_response(['success' => true, 'message' => 'Login berhasil.']);
+// [DIPERBAIKI] Memverifikasi dengan data dari kolom 'password'
+if ($user && password_verify($password, $user['password'])) {
+    // Password cocok! Login berhasil.
+    json_response(['success' => true]);
 } else {
-    // login gagal
-    json_response(['success' => false, 'message' => 'Email atau password salah.'], 401);
+    // Pengguna tidak ditemukan atau password salah.
+    json_response(['success' => false, 'message' => 'Email atau password salah.']);
 }
 
 pg_close($dbconn);
 ?>
+

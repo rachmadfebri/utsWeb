@@ -7,7 +7,7 @@ if (!$dbconn) {
 }
 
 // mengambil semua karya, diurutkan dari yang terbaru
-$query = 'SELECT id, judul, deskripsi_singkat, url_gambar FROM works ORDER BY tanggal_dibuat DESC';
+$query = 'SELECT id, judul, deskripsi_singkat, url_gambar FROM artworks ORDER BY tanggal_dibuat DESC';
 $result = pg_query($dbconn, $query);
 
 if (!$result) {
