@@ -15,7 +15,7 @@ if (!$dbconn) {
 
 // [DIPERBARUI] Menambahkan w.deskripsi_singkat dan u.avatar_url
 $query = 'SELECT w.judul, w.deskripsi_singkat, w.deskripsi_lengkap, w.url_gambar, w.tanggal_dibuat, 
-                 u.nama_lengkap, u.jabatan, u.avatar_url 
+                 nama_lengkap, role_user, u.avatar_url 
           FROM artworks w 
           JOIN users u ON w.user_id = u.id 
           WHERE w.id = $1';

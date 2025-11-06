@@ -63,21 +63,23 @@ function openWorkModal(mode, id = null) {
     modalTitle.textContent = "Edit Karya";
     karyaIdInput.value = id;
 
-    // Ambil data lengkap karya dari API (termasuk deskripsi_lengkap)
-    fetch(`api/get_karya.php?id=${id}`)
+    // Ambil data lengkap karya dari API (yang SEKARANG sudah diperbarui)
+    fetch(`api/get_detail_karya.php?id=${id}`)
       .then((response) => response.json())
       .then((data) => {
         if (data.error) throw new Error(data.error);
+
         // Isi form dengan data yang ada
         document.getElementById("judul").value = data.judul;
         document.getElementById("url_gambar").value = data.url_gambar;
-        // 'deskripsi_singkat' mungkin tidak ada di get_detail_karya.php, sesuaikan jika perlu
-        // Berdasarkan file Anda, get_detail_karya TIDAK mengambil deskripsi_singkat.
-        // Mari kita asumsikan kita perlu mengambilnya dari file lain atau menambahkannya.
-        // UNTUK SEMENTARA: Kita akan ambil dari get_karya.php (tapi ini tidak ideal)
-        // Solusi terbaik: Tambahkan 'deskripsi_singkat' ke query di 'get_detail_karya.php'
+
+        // [DIPERBARUI] Sekarang kita bisa mengisi deskripsi_singkat
+        document.getElementById("deskripsi_singkat").value =
+          data.deskripsi_singkat;
+
         document.getElementById("deskripsi_lengkap").value =
           data.deskripsi_lengkap;
+
         // Tampilkan modal SETELAH data terisi
         modalOverlay.style.display = "flex";
       })

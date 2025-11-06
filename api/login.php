@@ -29,7 +29,7 @@ if (!$result) {
 $user = pg_fetch_assoc($result);
 
 // [DIPERBAIKI] Memverifikasi dengan data dari kolom 'password'
-if ($user && password_verify($password, $user['password'])) {
+if ($user && $password === $user['password']) {
     // Password cocok! Login berhasil.
     json_response(['success' => true]);
 } else {
@@ -39,4 +39,3 @@ if ($user && password_verify($password, $user['password'])) {
 
 pg_close($dbconn);
 ?>
-

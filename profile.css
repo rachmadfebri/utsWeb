@@ -361,19 +361,19 @@ body {
 }
 
 .btn-edit {
-  background-color: var(--border-color);
+  background-color: var(--accent-color);
   color: var(--primary-text-color);
 }
 .btn-edit:hover {
-  background-color: #3a3a3a;
+  background-color: #00e0e0;
 }
 
 .btn-delete {
-  background-color: #5d1a1a;
-  color: #ffc2c2;
+  background-color: var(--border-color);
+  color: #3a3a3a;
 }
 .btn-delete:hover {
-  background-color: #a32d2d;
+  background-color: #5d1a1a;
   color: white;
 }
 
