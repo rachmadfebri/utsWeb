@@ -26,6 +26,30 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   });
 
+  //logout
+  const logoutButton = document.getElementById("public-logout-btn");
+  if (logoutButton) {
+    logoutButton.addEventListener("click", (e) => {
+      e.preventDefault(); // Mencegah link berpindah halaman
+
+      if (confirm("Apakah Anda yakin ingin logout?")) {
+        fetch("api/logout.php")
+          .then((response) => response.json())
+          .then((data) => {
+            if (data.success) {
+              alert("Anda telah berhasil logout.");
+              // Arahkan kembali ke halaman login
+              window.location.href = "login.html";
+            }
+          })
+          .catch((error) => {
+            console.error("Error logging out:", error);
+            alert("Gagal logout. Silakan coba lagi.");
+          });
+      }
+    });
+  }
+
   // 3. Handle submit form (untuk Create dan Update)
   workForm.addEventListener("submit", handleFormSubmit);
 

@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Register - KlipIn</title>
+
+    <link rel="stylesheet" href="login.css" />
+  </head>
+  <body>
+    <div class="login-container">
+      <a
+        href="#"
+        class="logo"
+        style="display: inline-block; margin-bottom: 10px"
+        >Klip<span>In</span></a
+      >
+
+      <h1>Buat Akun Baru</h1>
+      <p>Silakan isi data Anda untuk mendaftar.</p>
+
+      <form id="register-form">
+        <div class="input-group">
+          <label for="nama_lengkap">Nama Lengkap</label>
+          <input type="text" id="nama_lengkap" required />
+        </div>
+        <div class="input-group">
+          <label for="email">Email</label>
+          <input type="email" id="email" required />
+        </div>
+        <div class="input-group">
+          <label for="password">Password</label>
+          <input type="password" id="password" required />
+        </div>
+
+        <button type="submit" class="login-button">Register</button>
+      </form>
+
+      <div
+        class="error-message"
+        id="error-message"
+        style="display: block; color: #ff4d4d"
+      ></div>
+
+      <div class="register-link" style="margin-top: 20px">
+        Sudah punya akun? <a href="login.html">Login di sini</a>
+      </div>
+    </div>
+
+    <script src="register.js"></script>
+  </body>
+</html>

@@ -83,8 +83,9 @@ body::before {
 }
 
 .login-container p {
+  margin-top: 20px;
   color: var(--secondary-text-color);
-  margin-bottom: 30px;
+  margin-bottom: 50px;
 }
 
 .input-group {
@@ -114,6 +115,18 @@ body::before {
   outline: none;
   border-color: var(--accent-color);
   box-shadow: 0 0 10px rgba(0, 255, 255, 0.3);
+}
+
+.register-link {
+  margin-bottom: 20px;
+  font-size: 0.9rem;
+  color: var(--secondary-text-color);
+}
+
+.register-link a {
+  color: var(--accent-color);
+  text-decoration: none;
+  font-weight: 500;
 }
 
 .login-button {
