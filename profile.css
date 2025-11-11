@@ -362,7 +362,7 @@ body {
 
 .btn-edit {
   background-color: var(--accent-color);
-  color: var(--primary-text-color);
+  color: var(--border-color);
 }
 .btn-edit:hover {
   background-color: #00e0e0;
@@ -370,7 +370,7 @@ body {
 
 .btn-delete {
   background-color: var(--border-color);
-  color: #3a3a3a;
+  color: white;
 }
 .btn-delete:hover {
   background-color: #5d1a1a;

@@ -1,11 +1,17 @@
 <?php
+session_start(); // Wajib
 require_once 'config.php';
+
+// Cek Keamanan
+if (!isset($_SESSION['user_id'])) {
+    json_response(['success' => false, 'message' => 'Anda harus login untuk mengedit.'], 401);
+}
+$user_id = $_SESSION['user_id']; // Ambil user_id dari SESSION
 
 $input = json_decode(file_get_contents('php://input'), true);
 
-// Validasi, pastikan ID ada
-if (!$input || !isset($input['id']) || !isset($input['judul']) || !isset($input['url_gambar'])) {
-    json_response(['success' => false, 'message' => 'Data tidak lengkap (ID, judul, url_gambar wajib).'], 400);
+if (!$input || !isset($input['id']) || !isset($input['judul'])) {
+    json_response(['success' => false, 'message' => 'Data tidak lengkap.'], 400);
 }
 
 $karya_id = $input['id'];
@@ -19,33 +25,33 @@ if (!$dbconn) {
     json_response(['success' => false, 'message' => 'Koneksi database gagal.'], 500);
 }
 
+// Tambahkan "AND user_id = $6" untuk keamanan
 $query = 'UPDATE artworks SET 
             judul = $1, 
             deskripsi_singkat = $2, 
             deskripsi_lengkap = $3, 
             url_gambar = $4 
-          WHERE id = $5';
+          WHERE id = $5 AND user_id = $6'; // Pastikan user hanya bisa edit karyanya sendiri
           
 $params = array(
     $judul,
     $deskripsi_singkat,
     $deskripsi_lengkap,
     $url_gambar,
-    $karya_id
+    $karya_id,
+    $user_id // Tambahkan user_id di parameter
 );
 
 $result = pg_query_params($dbconn, $query, $params);
 
 if ($result) {
-    // pg_affected_rows bisa digunakan untuk mengecek apakah ada baris yang benar-benar ter-update
     if (pg_affected_rows($result) > 0) {
         json_response(['success' => true, 'message' => 'Karya berhasil diperbarui.']);
     } else {
-        json_response(['success' => false, 'message' => 'Tidak ada karya yang diperbarui (mungkin ID tidak ditemukan).']);
+        json_response(['success' => false, 'message' => 'Tidak ada karya yang diperbarui (ID tidak ditemukan atau bukan milik Anda).']);
     }
 } else {
     json_response(['success' => false, 'message' => 'Gagal memperbarui karya.', 'db_error' => pg_last_error($dbconn)], 500);
 }
-
 pg_close($dbconn);
 ?>

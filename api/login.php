@@ -1,10 +1,10 @@
 <?php
+// TAMBAHKAN session_start()
+session_start();
 require_once 'config.php';
 
-// Mengambil data JSON yang dikirim dari frontend
 $input = json_decode(file_get_contents('php://input'), true);
 
-// Validasi input awal
 if (!$input || !isset($input['email']) || !isset($input['password'])) {
     json_response(['success' => false, 'message' => 'Input tidak lengkap.'], 400);
 }
@@ -12,14 +12,13 @@ if (!$input || !isset($input['email']) || !isset($input['password'])) {
 $email = $input['email'];
 $password = $input['password'];
 
-// Menghubungkan ke database
 $dbconn = pg_connect($conn_string);
 if (!$dbconn) {
     json_response(['success' => false, 'message' => 'Koneksi database gagal.'], 500);
 }
 
-// [DIPERBAIKI] Mengambil dari kolom 'password', bukan 'password_hash'
-$query = 'SELECT id, password FROM users WHERE email = $1';
+// TAMBAHKAN 'nama_lengkap' ke query
+$query = 'SELECT id, nama_lengkap, password FROM users WHERE email = $1';
 $result = pg_query_params($dbconn, $query, array($email));
 
 if (!$result) {
@@ -28,12 +27,16 @@ if (!$result) {
 
 $user = pg_fetch_assoc($result);
 
-// [DIPERBAIKI] Memverifikasi dengan data dari kolom 'password'
-if ($user && $password === $user['password']) {
-    // Password cocok! Login berhasil.
+if ($user && password_verify($password, $user['password'])) {
+    // ---- TAMBAHKAN BLOK INI ----
+    // Password cocok! Buat session di sini
+    // sama seperti di admin/login_action.php
+    $_SESSION['user_id'] = $user['id'];
+    $_SESSION['nama_lengkap'] = $user['nama_lengkap'];
+    // ----------------------------
+
     json_response(['success' => true]);
 } else {
-    // Pengguna tidak ditemukan atau password salah.
     json_response(['success' => false, 'message' => 'Email atau password salah.']);
 }
 

@@ -1,17 +1,19 @@
 <?php
+session_start(); // Wajib
 require_once 'config.php';
 
-// Mengambil data JSON yang dikirim dari frontend
+// Cek Keamanan: Apakah user sudah login?
+if (!isset($_SESSION['user_id'])) {
+    json_response(['success' => false, 'message' => 'Anda harus login untuk menambah karya.'], 401);
+}
+// Ambil user_id dari SESSION
+$user_id = $_SESSION['user_id']; 
+
 $input = json_decode(file_get_contents('php://input'), true);
 
-// Validasi
 if (!$input || !isset($input['judul']) || !isset($input['url_gambar'])) {
     json_response(['success' => false, 'message' => 'Data tidak lengkap.'], 400);
 }
-
-// Untuk sementara, kita hardcode user_id = 1, sama seperti di get_profil.php
-// Dalam aplikasi nyata, ini harus diambil dari SESSION login
-$user_id = 1; 
 
 $judul = $input['judul'];
 $deskripsi_singkat = $input['deskripsi_singkat'] ?? '';
@@ -23,12 +25,11 @@ if (!$dbconn) {
     json_response(['success' => false, 'message' => 'Koneksi database gagal.'], 500);
 }
 
-// Query untuk memasukkan data baru
 $query = 'INSERT INTO artworks (user_id, judul, deskripsi_singkat, deskripsi_lengkap, url_gambar, tanggal_dibuat) 
           VALUES ($1, $2, $3, $4, $5, NOW())';
           
 $params = array(
-    $user_id,
+    $user_id, // Gunakan user_id dari session
     $judul,
     $deskripsi_singkat,
     $deskripsi_lengkap,
@@ -42,6 +43,5 @@ if ($result) {
 } else {
     json_response(['success' => false, 'message' => 'Gagal menambahkan karya.', 'db_error' => pg_last_error($dbconn)], 500);
 }
-
 pg_close($dbconn);
 ?>
